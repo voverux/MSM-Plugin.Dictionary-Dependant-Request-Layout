@@ -1,0 +1,28 @@
+﻿{
+    "Name": "MarvalBaltic.Plugins.DictionaryDependantRequestLayout",
+    "Organisation": "Marval Baltic",
+    "DisplayName": "Dictionary Dependant Request Layout",
+    "Icon": "img/request_layout_16.png",
+    "Version": "1.0.0",
+    "SupportedVersions": [
+        "14.6.1",
+        "14.6.0",
+        "14.5.1",
+        "14.5.0",
+        "14.4.3",
+        "14.4.2",
+        "14.4.1",
+        "14.4.0",
+        "14.3.4",
+        "14.3.1"
+    ],
+    "Pages": [
+        "Request.aspx"
+    ],
+    "HtmlImportFile": "dictionary_dependant_request_layout.html",
+    "TagName": "marval-baltic-plugins-dictionary-dependant-request-layout",
+    "GlobalSettings": [
+		"Dictionary Id",
+		"Plugin Rules"
+    ]
+}

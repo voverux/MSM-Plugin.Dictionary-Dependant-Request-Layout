@@ -1,0 +1,77 @@
+﻿<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<script src="Template.js"></script>
+<script>
+    (function () {
+
+        var MarvalSoftware = window.top.MarvalSoftware;
+        var $ = window.top.$;
+
+        MarvalSoftware.Plugins.define("marval-baltic-plugins-dictionary-dependant-request-layout",
+            {
+                _pluginId: "marval-baltic-plugins-dictionary-dependant-request-layout",
+                _getPluginPath: function () { return this.attributes["data-pluginpath"].value; },
+                _pluginHandlerRequest: null,
+                _pluginSettings: null,
+                _requestTypeId: null,
+                _requestLayoutId: null,
+
+                init: function () {
+                    var page = MarvalSoftware.UI.Controls.ScriptManager.getInstance().getControl("__Page");
+                    if (!page) return;
+                    this._requestTypeId = page._requestTypeId;
+                    this._requestLayoutId = page._layoutId;
+                    if (!this._isCorrectId(this._requestTypeId) || !this._isCorrectId(this._requestLayoutId)) return;
+
+                    alert(this._requestTypeId + ' - ' + this._requestLayoutId);
+
+                    //this._getPluginSettings(
+                    //    this,
+                    //    this._checkRules
+                    //);
+                },
+
+                _getPluginSettings: function (plugin, callback) {
+                    if (this._pluginHandlerRequest) {
+                        this._pluginHandlerRequest.abort();
+                        this._pluginHandlerRequest = null;
+                    }
+                    this._pluginHandlerRequest = $.ajax({
+                        type: "GET",
+                        url: this._getPluginPath() + "handler/BackendHandler.ashx",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (result) {
+                            if (result) {
+                                plugin._pluginSettings = result;
+                                callback();
+                            }
+                        }.bind(this),
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            if (xhr.status > 0) this._showErrorMessage("Plugin Handler Error!\n" + xhr.status + '\n' + thrownError);
+                        }.bind(this)
+                    });
+                },
+
+                _checkRules: function () {
+                    alert("checking rules");
+                },
+
+                _isCorrectId: function (val) {
+                    return (typeof val === 'number' && (val % 1) === 0 && val > 0);
+                },
+
+                _showErrorMessage: function (errorMessage) {
+                    MarvalSoftware.UI.MessageBox.show(
+                        "Plugin Error [" + this._pluginId + "]",
+                        errorMessage,
+                        MarvalSoftware.UI.MessageBox.Types.ERROR,
+                        null,
+                        null,
+                        400
+                    );
+                }
+
+            });
+
+    })();
+</script>
