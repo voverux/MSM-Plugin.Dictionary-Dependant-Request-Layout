@@ -17,7 +17,7 @@ Please see your MSM documentation for information on how to install plugins.
 
 Once the plugin has been installed as plugin parameters you need to specify:
 * Dictionary Id - Dictionary field according to which value Request layout must by selected
-* Plugin Rules - Layout selection Rules saved in json format, e.g. {"rules": [{"classificationIds":[1000,1001], "layoutId": 2000},{"classificationId":1002, "layoutId": 2001}]}
+* Plugin Rules - Layout selection Rules saved in json format, e.g. [{"classificationIds":[1000,1001], "layoutId": 2000},{"classificationId":1002, "layoutId": 2001}]
 
 ## Usage
 
